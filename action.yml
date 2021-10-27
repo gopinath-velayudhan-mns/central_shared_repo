@@ -19,15 +19,12 @@ name: 'Hello World'
 description: 'Greet someone'
 inputs:
   who-to-greet:  # id of input
-    description: 'Who to greet'
     required: true
     default: 'World'
   acr_packagename:
     required: true
-    type: string
   acr_packagetag:
     required: true
-    type: string
   acr_username:
     required: true
   acr_password:
@@ -53,5 +50,5 @@ runs:
       shell: bash
     - run: docker images
       shell: bash  
-    - run: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
+    - run: echo docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
       shell: bash
