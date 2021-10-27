@@ -22,6 +22,20 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  acr_packagename:
+    required: true
+    type: string
+  acr_packagetag:
+    required: true
+    type: string
+secrets:
+  acr_username:
+    required: true
+  acr_password:
+    required: true
+  acr_servername:
+    required: true  
+
 outputs:
   random-number:
     description: "Random number"
