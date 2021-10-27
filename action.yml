@@ -30,8 +30,9 @@ inputs:
   acr_password:
     required: true
   acr_servername:
-    required: true  
-
+    description: “server name of the ACR”
+    required: true
+  
 outputs:
   random-number:
     description: "Random number"
@@ -52,9 +53,9 @@ runs:
       shell: bash  
     - uses: Azure/docker-login@v1
         with:
-          username: ${{ inputs.acr_username }}
-          password: ${{ inputs.acr_password }}
-          login-server: ${{ inputs.acr_servername }}  
+          username: ${{inputs.acr_username}}
+          password: ${{inputs.acr_password}}
+          login-server: ${{inputs.acr_servername}}  
     - run: |
         echo docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
         docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}
