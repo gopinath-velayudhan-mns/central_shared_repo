@@ -28,7 +28,6 @@ inputs:
   acr_packagetag:
     required: true
     type: string
-secrets:
   acr_username:
     required: true
   acr_password:
