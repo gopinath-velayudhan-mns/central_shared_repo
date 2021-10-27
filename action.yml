@@ -52,11 +52,8 @@ runs:
       shell: bash  
     - uses: Azure/docker-login@v1
         with:
-          # Container registry username
           username: ${{ inputs.acr_username }}
-          # Container registry password
           password: ${{ inputs.acr_password }}
-          # Container registry server url
           login-server: ${{ inputs.acr_servername }}  
     - run: |
         echo docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
