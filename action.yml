@@ -52,10 +52,10 @@ runs:
     - run: docker images
       shell: bash  
     - uses: Azure/docker-login@v1
-        with:
-          username: ${{inputs.acr_username}}
-          password: ${{inputs.acr_password}}
-          login-server: ${{inputs.acr_servername}}  
+      with:
+        username: ${{inputs.acr_username}}
+        password: ${{inputs.acr_password}}
+        login-server: ${{inputs.acr_servername}}  
     - run: |
         echo docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
         docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}
