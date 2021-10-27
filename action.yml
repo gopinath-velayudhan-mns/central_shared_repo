@@ -50,5 +50,7 @@ runs:
       shell: bash
     - run: docker images
       shell: bash  
-    - run: echo docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
+    - run: |
+        echo docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
+        docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}
       shell: bash
