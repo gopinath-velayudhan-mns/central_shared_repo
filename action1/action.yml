@@ -15,7 +15,7 @@
 #   args:
 #     - ${{ inputs.who-to-greet }}
 
-name: 'Hello World'
+name: 'Hello World '
 description: 'Greet someone'
 inputs:
   who-to-greet:  # id of input
@@ -40,7 +40,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }} ${{inputs.acr_packagename}} ${{inputs.acr_servername}}.
+    - run: echo Hello, You are Executing REUSABLE Action from ACTION1 with Inputs ${{ inputs.who-to-greet }} ${{inputs.acr_packagename}} ${{inputs.acr_servername}}.
       shell: bash
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
@@ -57,6 +57,6 @@ runs:
         password: ${{inputs.acr_password}}
         login-server: ${{inputs.acr_servername}}  
     - run: |
-        echo docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
+        echo runningg command: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
         docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}
       shell: bash
