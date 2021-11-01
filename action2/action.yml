@@ -1,0 +1,62 @@
+# action.yml
+# name: 'Hello World'
+# description: 'Greet someone and record the time'
+# inputs:
+#   who-to-greet:  # id of input
+#     description: 'Who to greet'
+#     required: true
+#     default: 'World'
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+# runs:
+#   using: 'docker'
+#   image: 'Dockerfile'
+#   args:
+#     - ${{ inputs.who-to-greet }}
+
+name: 'Hello World '
+description: 'Greet someone'
+inputs:
+  who-to-greet:  # id of input
+    required: true
+    default: 'World'
+  acr_packagename:
+    required: true
+  acr_packagetag:
+    required: true
+  acr_username:
+    required: true
+  acr_password:
+    required: true
+  acr_servername:
+    description: “server name of the ACR”
+    required: true
+  
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    - run: echo Hello, You are Executing REUSABLE Action from ACTION1 with Inputs ${{ inputs.who-to-greet }} ${{inputs.acr_packagename}} ${{inputs.acr_servername}}.
+      shell: bash
+    - id: random-number-generator
+      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+      shell: bash
+    - run: ${{ github.action_path }}/goodbye.sh
+      shell: bash
+    - run: ls -lart
+      shell: bash
+    - run: docker images
+      shell: bash  
+    - uses: Azure/docker-login@v1
+      with:
+        username: ${{inputs.acr_username}}
+        password: ${{inputs.acr_password}}
+        login-server: ${{inputs.acr_servername}}  
+    - run: |
+        echo runningg command: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
+        docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}
+      shell: bash
