@@ -1,23 +1,13 @@
-action.yml
 name: 'Hello World'
-description: 'Greet someone and record the time'
+description: 'Greet someone'
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
     required: true
     default: 'World'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
-  
-outputs:
   random-number:
-    description: "Random number Generator"
+    description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-id }}
 runs:
   using: "composite"
@@ -33,4 +23,3 @@ runs:
       shell: bash
     - run: docker images
       shell: bash
-    
