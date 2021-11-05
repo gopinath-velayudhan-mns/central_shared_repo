@@ -58,8 +58,8 @@ runs:
 #         #password: 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
     - name: Execute build 
       run: |
-        #docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p ${{ inputs.cr_password }}
-        docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p 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
+        docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p ${{ inputs.cr_password }}
+        #docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p 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
         echo =================  Executing the Build LOCALLY ======================
         docker images
         echo docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
