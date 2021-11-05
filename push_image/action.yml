@@ -55,7 +55,7 @@ runs:
         registry: ghcr.io
         username: ${{ github.actor }}
         #password: ${{ inputs.cr_password }}
-        password: ${{secrets.PAT_GITHUB}} 
+        password: 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
     - name: Execute build 
       run: |
         #docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p ${{ inputs.cr_password }}
