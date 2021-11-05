@@ -20,6 +20,9 @@ outputs:
   random-number:
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-id }}
+    
+    
+    
 runs:
   using: "composite"
   steps:
@@ -43,8 +46,8 @@ runs:
 #         password: ${{inputs.cr_password}}
 #         login-server: ${{inputs.cr_servername}}  
 #     - run: |
-#         echo runningg command: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
-#         docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}
+#         echo runningg command: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ inputs.cr_packagetag }}  
+#         docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ inputs.cr_packagetag }}
 #       shell: bash
 
 
@@ -61,9 +64,9 @@ runs:
       run: |
         echo =================  Pushing to Github Packages ======================
         docker images
-        docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ github.run_id }}
+        docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }} ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
         docker images
-        docker push ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ github.run_id }}
+        docker push ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
       shell: bash        
           
     
