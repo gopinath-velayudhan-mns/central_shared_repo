@@ -66,6 +66,6 @@ runs:
         #docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }}
         echo docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{github.run_id }}
         docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{github.run_id }}
-              
+      shell: bash        
           
     
