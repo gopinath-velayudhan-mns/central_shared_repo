@@ -54,7 +54,8 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        #password: ${{ GITHUB_TOKEN }}
+        password: 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
     - name: Execute build 
       run: |
         echo =================  Executing the Build LOCALLY ======================
