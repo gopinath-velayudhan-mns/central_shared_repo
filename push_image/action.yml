@@ -1,20 +1,4 @@
 # action.yml
-# name: 'Hello World'
-# description: 'Greet someone and record the time'
-# inputs:
-#   who-to-greet:  # id of input
-#     description: 'Who to greet'
-#     required: true
-#     default: 'World'
-# outputs:
-#   time: # id of output
-#     description: 'The time we greeted you'
-# runs:
-#   using: 'docker'
-#   image: 'Dockerfile'
-#   args:
-#     - ${{ inputs.who-to-greet }}
-
 name: 'Hello World '
 description: 'Greet someone'
 inputs:
@@ -51,7 +35,8 @@ runs:
     - run: docker images
       shell: bash  
       
-      
+########### Login and Push image to Azure Container Registry ##############
+
 #     - uses: Azure/docker-login@v1
 #       with:
 #         username: ${{inputs.cr_username}}
@@ -61,26 +46,25 @@ runs:
 #         echo runningg command: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}  
 #         docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ github.run_id }}
 #       shell: bash
-    
-    
+
+
+#########  Switching over to Github Packages ##########
     - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Execute build 
-        run: |
-          echo =================  Executing the Build LOCALLY ======================
-          docker images
-          echo docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{github.run_id }}
-          
-          docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} -t ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
-          docker images
-          #docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }}
-          docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{github.run_id }}
-          
-          
+    - name: Execute build 
+      run: |
+        echo =================  Executing the Build LOCALLY ======================
+        docker images
+        echo docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{github.run_id }}
+        
+        docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} -t ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
+        docker images
+        #docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }}
+        docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{github.run_id }}
+              
           
     
