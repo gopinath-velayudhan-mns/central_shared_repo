@@ -48,26 +48,22 @@ runs:
 #       shell: bash
 
 
+
+
 #########  Switching over to Github Packages ##########
     - name: Log in to the GITHUB Container registry
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        #password: ${{ inputs.cr_password }}
         password: ${{ github.token }}
     - name: Execute build 
       run: |
-        #docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p ${{ inputs.cr_password }}
-        #docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p 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
-        echo =================  Executing the Build LOCALLY ======================
+        echo =================  Pushing to Github Packages ======================
         docker images
-        echo docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
-        docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
+        docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ github.run_id }}
         docker images
-        #docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }}
-        echo docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{github.run_id }}
-        docker push ghcr.io/gopinath-velayudhan-mns/nginx_gv:${{ github.run_id }}
+        docker push ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ github.run_id }}
       shell: bash        
           
     
