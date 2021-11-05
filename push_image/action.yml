@@ -49,13 +49,13 @@ runs:
 
 
 #########  Switching over to Github Packages ##########
-    - name: Log in to the Container registry
+    - name: Log in to the GITHUB Container registry
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
         #password: ${{ secrets.PAT_GITHUB}}
-        password: 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
+        password: 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
     - name: Execute build 
       run: |
         echo =================  Executing the Build LOCALLY ======================
