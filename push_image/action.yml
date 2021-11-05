@@ -61,7 +61,7 @@ runs:
         docker login ghcr.io/gopinath-velayudhan-mns -u gopinath-velayudhan-mns -p ${{ inputs.cr_password }}
         echo =================  Executing the Build LOCALLY ======================
         docker images
-        echo docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} -t ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
+        echo docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
         docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }} -t ghcr.io/gopinath-velayudhan-mns/${{inputs.cr_packagename}}:${{ github.run_id }}
         docker images
         #docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ github.run_id }}
