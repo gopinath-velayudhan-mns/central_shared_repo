@@ -38,35 +38,35 @@ runs:
     - run: docker images
       shell: bash  
       
-# ########### Login and Push image to Azure Container Registry ##############
+########### Login and Push image to Azure Container Registry ##############
 
-#     - uses: Azure/docker-login@v1
-#       with:
-#         username: ${{inputs.cr_username}}
-#         password: ${{inputs.cr_password}}
-#         login-server: ${{inputs.cr_servername}}  
-#     - run: |
-#         echo runningg command: docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}  
-#         docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
-#       shell: bash
-
-
-
-
-#########  Switching over to Github Packages ##########
-    - name: Log in to the GITHUB Container registry
-      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+    - uses: Azure/docker-login@v1
       with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ github.token }}
-    - name: Execute build 
-      run: |
-        echo =================  Pushing to Github Packages ======================
-        docker images
-        docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }} ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
-        docker images
-        docker push ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
-      shell: bash        
+        username: ${{inputs.cr_username}}
+        password: ${{inputs.cr_password}}
+        login-server: ${{inputs.cr_servername}}  
+    - run: |
+        echo runningg command: docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}  
+        docker push ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
+      shell: bash
+
+
+
+
+# #########  Switching over to Github Packages ##########
+#     - name: Log in to the GITHUB Container registry
+#       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+#       with:
+#         registry: ghcr.io
+#         username: ${{ github.actor }}
+#         password: ${{ github.token }}
+#     - name: Execute build 
+#       run: |
+#         echo =================  Pushing to Github Packages ======================
+#         docker images
+#         docker tag  ${{ inputs.cr_servername }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }} ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
+#         docker images
+#         docker push ghcr.io/${{ github.actor }}/${{inputs.cr_packagename}}:${{ inputs.cr_packagetag }}
+#       shell: bash        
           
     
