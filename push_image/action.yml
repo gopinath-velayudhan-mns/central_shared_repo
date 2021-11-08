@@ -40,15 +40,15 @@ runs:
       
 ########### Login and Push image to Azure Container Registry ##############
 
-#     - uses: Azure/docker-login@v1
-#       with:
-#         username: ${{inputs.cr_username}}
-#         password: ${{inputs.cr_password}}
-#         login-server: ${{inputs.cr_servername}}  
-#     - run: |
-#         echo runningg command: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ inputs.cr_packagetag }}  
-#         docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ inputs.cr_packagetag }}
-#       shell: bash
+    - uses: Azure/docker-login@v1
+      with:
+        username: ${{inputs.cr_username}}
+        password: ${{inputs.cr_password}}
+        login-server: ${{inputs.cr_servername}}  
+    - run: |
+        echo runningg command: docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ inputs.cr_packagetag }}  
+        docker push ${{ inputs.acr_servername }}/${{inputs.acr_packagename}}:${{ inputs.cr_packagetag }}
+      shell: bash
 
 
 
